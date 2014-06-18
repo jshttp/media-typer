@@ -31,6 +31,11 @@ properties (examples are shown for the string `'image/svg+xml; charset=utf-8'`):
 
  - `parameters`: An object of the parameters in the media type (name of parameter always lower case). Example: `{charset: 'utf-8'}`
 
+### typer.parse(req)
+
+Parse the `content-type` header from the given `req`. Short-cut for
+`typer.parse(req.headers['content-type'])`.
+
 ## License
 
 The MIT License (MIT)

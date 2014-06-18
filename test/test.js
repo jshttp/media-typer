@@ -75,4 +75,26 @@ describe('typer.parse(string)', function () {
   it('should require argument', function () {
     typer.parse.should.throw(/string.*required/)
   })
+
+  it('should reject non-strings', function () {
+    typer.parse.bind(null, 7).should.throw(/string.*required/)
+  })
+})
+
+describe('typer.parse(req)', function () {
+  it('should parse content-type header', function () {
+    var req = {headers: {'content-type': 'text/html'}}
+    var type = typer.parse(req)
+    type.type.should.equal('text')
+    type.subtype.should.equal('html')
+  })
+
+  it('should reject objects without headers property', function () {
+    typer.parse.bind(null, {}).should.throw(/string.*required/)
+  })
+
+  it('should reject missing content-type', function () {
+    var req = {headers: {}}
+    typer.parse.bind(null, req).should.throw(/string.*required/)
+  })
 })

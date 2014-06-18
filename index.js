@@ -64,13 +64,22 @@ exports.parse = parse
 /**
  * Parse media type to object.
  *
- * @param {string} string
+ * @param {string|object} string
  * @return {Object}
  * @api public
  */
 
 function parse(string) {
-  if (!string || typeof string !== 'string') {
+  if (!string) {
+    throw new TypeError('argument string is required')
+  }
+
+  // support req-like objects as argument
+  if (typeof string === 'object' && typeof string.headers === 'object') {
+    string = string.headers && string.headers['content-type']
+  }
+
+  if (typeof string !== 'string') {
     throw new TypeError('argument string is required to be a string')
   }
 
