@@ -41,6 +41,12 @@ Parse the `content-type` header from the given `req`. Short-cut for
 Parse the `content-type` header set on the given `res`. Short-cut for
 `typer.parse(res.getHeader('content-type'))`.
 
+### typer.format(obj)
+
+Format an objec into a media type string. This will return a string of the
+mime type for the given object. For the properties of the object, see the
+documentation for `typer.parse(string)`.
+
 ## License
 
 The MIT License (MIT)

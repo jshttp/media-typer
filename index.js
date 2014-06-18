@@ -27,7 +27,9 @@
  * CTL           = <any US-ASCII control character (octets 0 - 31) and DEL (127)>
  * OCTET         = <any 8-bit sequence of data>
  */
-var paramRegExp = /; *([!#$%&'\*\+\-\.0-9A-Z\^_`a-z\|~]+) *= *("(?:[ !\u0023-\u005b\u005d-\u00ff]|\\[\u0020-\u007e])*"|[!#$%&'\*\+\-\.0-9A-Z\^_`a-z\|~]+) */g;
+var paramRegExp = /; *([!#$%&'\*\+\-\.0-9A-Z\^_`a-z\|~]+) *= *("(?:[ !\u0023-\u005b\u005d-\u007e\u0080-\u00ff]|\\[\u0020-\u007e])*"|[!#$%&'\*\+\-\.0-9A-Z\^_`a-z\|~]+) */g;
+var textRegExp = /^[\u0020-\u007e\u0080-\u00ff]+$/
+var tokenRegExp = /^[!#$%&'\*\+\-\.0-9A-Z\^_`a-z\|~]+$/
 
 /**
  * RegExp to match quoted-pair in RFC 2616
@@ -36,6 +38,11 @@ var paramRegExp = /; *([!#$%&'\*\+\-\.0-9A-Z\^_`a-z\|~]+) *= *("(?:[ !\u0023-\u0
  * CHAR        = <any US-ASCII character (octets 0 - 127)>
  */
 var qescRegExp = /\\([\u0000-\u007f])/g;
+
+/**
+ * RegExp to match chars that must be quoted-pair in RFC 2616
+ */
+var quoteRegExp = /([\\"])/g;
 
 /**
  * RegExp to match type in RFC 6838
@@ -53,13 +60,73 @@ var qescRegExp = /\\([\u0000-\u007f])/g;
  * ALPHA =  %x41-5A / %x61-7A   ; A-Z / a-z
  * DIGIT =  %x30-39             ; 0-9
  */
+var subtypeNameRegExp = /^[A-Za-z0-9][A-Za-z0-9!#$&^_.-]{0,126}$/
+var typeNameRegExp = /^[A-Za-z0-9][A-Za-z0-9!#$&^_-]{0,126}$/
 var typeRegExp = /^ *([A-Za-z0-9][A-Za-z0-9!#$&^_-]{0,126})\/([A-Za-z0-9][A-Za-z0-9!#$&^_.+-]{0,126}) *$/;
 
 /**
  * Module exports.
  */
 
+exports.format = format
 exports.parse = parse
+
+/**
+ * Format object to media type.
+ *
+ * @param {object} obj
+ * @return {string}
+ * @api public
+ */
+
+function format(obj) {
+  if (!obj || typeof obj !== 'object') {
+    throw new TypeError('argument obj is required')
+  }
+
+  var parameters = obj.parameters
+  var subtype = obj.subtype
+  var suffix = obj.suffix
+  var type = obj.type
+
+  if (!type || !typeNameRegExp.test(type)) {
+    throw new TypeError('invalid type')
+  }
+
+  if (!subtype || !subtypeNameRegExp.test(subtype)) {
+    throw new TypeError('invalid subtype')
+  }
+
+  // format as type/subtype
+  var string = type + '/' + subtype
+
+  // append +suffix
+  if (suffix) {
+    if (!typeNameRegExp.test(suffix)) {
+      throw new TypeError('invalid suffix')
+    }
+
+    string += '+' + suffix
+  }
+
+  // append parameters
+  if (parameters && typeof parameters === 'object') {
+    var param
+    var params = Object.keys(parameters).sort()
+
+    for (var i = 0; i < params.length; i++) {
+      param = params[i]
+
+      if (!tokenRegExp.test(param)) {
+        throw new TypeError('invalid parameter name')
+      }
+
+      string += '; ' + param + '=' + qstring(parameters[param])
+    }
+  }
+
+  return string
+}
 
 /**
  * Parse media type to object.
@@ -133,6 +200,29 @@ function getcontenttype(obj) {
     // req-like
     return obj.headers && obj.headers['content-type']
   }
+}
+
+/**
+ * Quote a string if necessary.
+ *
+ * @param {string} val
+ * @return {string}
+ * @api private
+ */
+
+function qstring(val) {
+  var str = String(val)
+
+  // no need to quote tokens
+  if (tokenRegExp.test(str)) {
+    return str
+  }
+
+  if (str.length > 0 && !textRegExp.test(str)) {
+    throw new TypeError('invalid parameter value')
+  }
+
+  return '"' + str.replace(quoteRegExp, '\\$1') + '"'
 }
 
 /**
