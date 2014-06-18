@@ -1,5 +1,5 @@
-unreleased
-==========
+0.2.0 / 2014-06-18
+==================
 
   * Add `typer.format()` to format media types
 
