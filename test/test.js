@@ -37,6 +37,14 @@ describe('typer.parse(string)', function () {
     type.parameters.should.have.property('foo', 'bar')
   })
 
+  it('should parse parameters with extra LWS', function () {
+    var type = typer.parse('text/html ; charset=utf-8 ; foo=bar')
+    type.type.should.equal('text')
+    type.subtype.should.equal('html')
+    type.parameters.should.have.property('charset', 'utf-8')
+    type.parameters.should.have.property('foo', 'bar')
+  })
+
   it('should lower-case type', function () {
     var type = typer.parse('IMAGE/SVG+XML')
     type.type.should.equal('image')
