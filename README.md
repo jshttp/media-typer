@@ -36,6 +36,11 @@ properties (examples are shown for the string `'image/svg+xml; charset=utf-8'`):
 Parse the `content-type` header from the given `req`. Short-cut for
 `typer.parse(req.headers['content-type'])`.
 
+### typer.parse(res)
+
+Parse the `content-type` header set on the given `res`. Short-cut for
+`typer.parse(res.getHeader('content-type'))`.
+
 ## License
 
 The MIT License (MIT)
