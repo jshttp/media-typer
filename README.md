@@ -1,8 +1,8 @@
 # media-typer
 
 [![NPM version](https://badge.fury.io/js/media-typer.svg)](https://badge.fury.io/js/media-typer)
-[![Build Status](https://travis-ci.org/expressjs/media-typer.svg?branch=master)](https://travis-ci.org/expressjs/media-typer)
-[![Coverage Status](https://img.shields.io/coveralls/expressjs/media-typer.svg?branch=master)](https://coveralls.io/r/expressjs/media-typer)
+[![Build Status](https://travis-ci.org/jshttp/media-typer.svg?branch=master)](https://travis-ci.org/jshttp/media-typer)
+[![Coverage Status](https://img.shields.io/coveralls/jshttp/media-typer.svg?branch=master)](https://coveralls.io/r/jshttp/media-typer)
 
 Simple RFC 6838 media type parser
 

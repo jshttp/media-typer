@@ -4,7 +4,7 @@
   "version": "0.2.0",
   "author": "Douglas Christopher Wilson <doug@somethingdoug.com>",
   "license": "MIT",
-  "repository": "expressjs/media-typer",
+  "repository": "jshttp/media-typer",
   "devDependencies": {
     "istanbul": "0.2.10",
     "mocha": "~1.20.1",
