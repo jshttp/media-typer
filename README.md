@@ -47,7 +47,7 @@ Parse the `content-type` header from the given `req`. Short-cut for
 ### typer.parse(res)
 
 ```js
-var obj = typer.parse(req)
+var obj = typer.parse(res)
 ```
 
 Parse the `content-type` header set on the given `res`. Short-cut for
