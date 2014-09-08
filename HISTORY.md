@@ -1,5 +1,5 @@
-unreleased
-==========
+0.3.0 / 2014-09-07
+==================
 
   * Support Node.js 0.6
   * Throw error when parameter format invalid on parse
