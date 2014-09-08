@@ -1,8 +1,10 @@
 # media-typer
 
-[![NPM version](https://badge.fury.io/js/media-typer.svg)](https://badge.fury.io/js/media-typer)
-[![Build Status](https://travis-ci.org/jshttp/media-typer.svg?branch=master)](https://travis-ci.org/jshttp/media-typer)
-[![Coverage Status](https://img.shields.io/coveralls/jshttp/media-typer.svg?branch=master)](https://coveralls.io/r/jshttp/media-typer)
+[![NPM Version][npm-image]][npm-url]
+[![NPM Downloads][downloads-image]][downloads-url]
+[![Node.js Version][node-version-image]][node-version-url]
+[![Build Status][travis-image]][travis-url]
+[![Test Coverage][coveralls-image]][coveralls-url]
 
 Simple RFC 6838 media type parser
 
@@ -86,3 +88,14 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+
+[npm-image]: https://img.shields.io/npm/v/media-typer.svg?style=flat
+[npm-url]: https://npmjs.org/package/media-typer
+[node-version-image]: https://img.shields.io/badge/node.js-%3E%3D_0.8-brightgreen.svg?style=flat
+[node-version-url]: http://nodejs.org/download/
+[travis-image]: https://img.shields.io/travis/jshttp/media-typer.svg?style=flat
+[travis-url]: https://travis-ci.org/jshttp/media-typer
+[coveralls-image]: https://img.shields.io/coveralls/jshttp/media-typer.svg?style=flat
+[coveralls-url]: https://coveralls.io/r/jshttp/media-typer
+[downloads-image]: https://img.shields.io/npm/dm/media-typer.svg?style=flat
+[downloads-url]: https://npmjs.org/package/media-typer
