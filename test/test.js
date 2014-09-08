@@ -167,6 +167,12 @@ describe('typer.parse(string)', function () {
     })
   })
 
+  it('should throw on invalid parameter format', function () {
+    typer.parse.bind(null, 'text/plain; foo="bar').should.throw(/invalid parameter format/)
+    typer.parse.bind(null, 'text/plain; profile=http://localhost; foo=bar').should.throw(/invalid parameter format/)
+    typer.parse.bind(null, 'text/plain; profile=http://localhost').should.throw(/invalid parameter format/)
+  })
+
   it('should require argument', function () {
     typer.parse.should.throw(/string.*required/)
   })

@@ -2,6 +2,7 @@ unreleased
 ==========
 
   * Support Node.js 0.6
+  * Throw error when parameter format invalid on parse
 
 0.2.0 / 2014-06-18
 ==================
