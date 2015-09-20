@@ -193,39 +193,3 @@ describe('typer.parse(string)', function () {
     assert.throws(typer.parse.bind(null, 7), /string.*required/)
   })
 })
-
-describe('typer.parse(req)', function () {
-  it('should parse content-type header', function () {
-    var req = {headers: {'content-type': 'text/html'}}
-    var type = typer.parse(req)
-    assert.equal(type.type, 'text')
-    assert.equal(type.subtype, 'html')
-  })
-
-  it('should reject objects without headers property', function () {
-    assert.throws(typer.parse.bind(null, {}), /string.*required/)
-  })
-
-  it('should reject missing content-type', function () {
-    var req = {headers: {}}
-    assert.throws(typer.parse.bind(null, req), /string.*required/)
-  })
-})
-
-describe('typer.parse(res)', function () {
-  it('should parse content-type header', function () {
-    var res = {getHeader: function(){ return 'text/html'}}
-    var type = typer.parse(res)
-    assert.equal(type.type, 'text')
-    assert.equal(type.subtype, 'html')
-  })
-
-  it('should reject objects without getHeader method', function () {
-    assert.throws(typer.parse.bind(null, {}), /string.*required/)
-  })
-
-  it('should reject missing content-type', function () {
-    var res = {getHeader: function(){}}
-    assert.throws(typer.parse.bind(null, res), /string.*required/)
-  })
-})

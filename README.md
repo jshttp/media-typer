@@ -37,24 +37,6 @@ properties (examples are shown for the string `'image/svg+xml; charset=utf-8'`):
 
  - `parameters`: An object of the parameters in the media type (name of parameter always lower case). Example: `{charset: 'utf-8'}`
 
-### typer.parse(req)
-
-```js
-var obj = typer.parse(req)
-```
-
-Parse the `content-type` header from the given `req`. Short-cut for
-`typer.parse(req.headers['content-type'])`.
-
-### typer.parse(res)
-
-```js
-var obj = typer.parse(res)
-```
-
-Parse the `content-type` header set on the given `res`. Short-cut for
-`typer.parse(res.getHeader('content-type'))`.
-
 ### typer.format(obj)
 
 ```js

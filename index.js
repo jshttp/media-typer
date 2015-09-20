@@ -1,6 +1,6 @@
 /*!
  * media-typer
- * Copyright(c) 2014 Douglas Christopher Wilson
+ * Copyright(c) 2014-2015 Douglas Christopher Wilson
  * MIT Licensed
  */
 
@@ -141,11 +141,6 @@ function parse(string) {
     throw new TypeError('argument string is required')
   }
 
-  // support req/res-like objects as argument
-  if (typeof string === 'object') {
-    string = getcontenttype(string)
-  }
-
   if (typeof string !== 'string') {
     throw new TypeError('argument string is required to be a string')
   }
@@ -189,26 +184,6 @@ function parse(string) {
   obj.parameters = params
 
   return obj
-}
-
-/**
- * Get content-type from req/res objects.
- *
- * @param {object}
- * @return {Object}
- * @api private
- */
-
-function getcontenttype(obj) {
-  if (typeof obj.getHeader === 'function') {
-    // res-like
-    return obj.getHeader('content-type')
-  }
-
-  if (typeof obj.headers === 'object') {
-    // req-like
-    return obj.headers && obj.headers['content-type']
-  }
 }
 
 /**
