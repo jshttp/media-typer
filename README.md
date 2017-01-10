@@ -54,7 +54,7 @@ documentation for `typer.parse(string)`.
 [npm-image]: https://img.shields.io/npm/v/media-typer.svg?style=flat
 [npm-url]: https://npmjs.org/package/media-typer
 [node-version-image]: http://img.shields.io/node/v/media-typer.svg?style=flat
-[node-version-url]: http://nodejs.org/download/
+[node-version-url]: https://nodejs.org/en/download/
 [travis-image]: https://img.shields.io/travis/jshttp/media-typer.svg?style=flat
 [travis-url]: https://travis-ci.org/jshttp/media-typer
 [coveralls-image]: https://img.shields.io/coveralls/jshttp/media-typer.svg?style=flat
