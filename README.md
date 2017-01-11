@@ -51,13 +51,13 @@ documentation for `typer.parse(string)`.
 
 [MIT](LICENSE)
 
-[npm-image]: https://img.shields.io/npm/v/media-typer.svg?style=flat
+[npm-image]: https://img.shields.io/npm/v/media-typer.svg
 [npm-url]: https://npmjs.org/package/media-typer
-[node-version-image]: https://img.shields.io/node/v/media-typer.svg?style=flat
+[node-version-image]: https://img.shields.io/node/v/media-typer.svg
 [node-version-url]: https://nodejs.org/en/download/
-[travis-image]: https://img.shields.io/travis/jshttp/media-typer.svg?style=flat
+[travis-image]: https://img.shields.io/travis/jshttp/media-typer.svg
 [travis-url]: https://travis-ci.org/jshttp/media-typer
-[coveralls-image]: https://img.shields.io/coveralls/jshttp/media-typer.svg?style=flat
+[coveralls-image]: https://img.shields.io/coveralls/jshttp/media-typer.svg
 [coveralls-url]: https://coveralls.io/r/jshttp/media-typer
-[downloads-image]: https://img.shields.io/npm/dm/media-typer.svg?style=flat
+[downloads-image]: https://img.shields.io/npm/dm/media-typer.svg
 [downloads-url]: https://npmjs.org/package/media-typer
