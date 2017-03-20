@@ -76,7 +76,7 @@ exports.parse = parse
  *
  * @param {object} obj
  * @return {string}
- * @api public
+ * @public
  */
 
 function format(obj) {
@@ -133,7 +133,7 @@ function format(obj) {
  *
  * @param {string|object} string
  * @return {Object}
- * @api public
+ * @public
  */
 
 function parse(string) {
@@ -191,7 +191,7 @@ function parse(string) {
  *
  * @param {string} val
  * @return {string}
- * @api private
+ * @private
  */
 
 function qstring(val) {
@@ -214,7 +214,7 @@ function qstring(val) {
  *
  * @param {string} string
  * @return {Object}
- * @api private
+ * @private
  */
 
 function splitType(string) {
