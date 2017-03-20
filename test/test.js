@@ -12,7 +12,7 @@ var invalidTypes = [
   'text/p£ain',
   'text/(plain)',
   'text/@plain',
-  'text/plain,wrong',
+  'text/plain,wrong'
 ]
 
 describe('typer.format(obj)', function () {

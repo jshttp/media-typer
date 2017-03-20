@@ -27,9 +27,9 @@
  * CTL           = <any US-ASCII control character (octets 0 - 31) and DEL (127)>
  * OCTET         = <any 8-bit sequence of data>
  */
-var paramRegExp = /; *([!#$%&'\*\+\-\.0-9A-Z\^_`a-z\|~]+) *= *("(?:[ !\u0023-\u005b\u005d-\u007e\u0080-\u00ff]|\\[\u0020-\u007e])*"|[!#$%&'\*\+\-\.0-9A-Z\^_`a-z\|~]+) */g;
-var textRegExp = /^[\u0020-\u007e\u0080-\u00ff]+$/
-var tokenRegExp = /^[!#$%&'\*\+\-\.0-9A-Z\^_`a-z\|~]+$/
+var PARAM_REGEXP = /; *([!#$%&'*+.0-9A-Z^_`a-z|~-]+) *= *("(?:[ !\u0023-\u005b\u005d-\u007e\u0080-\u00ff]|\\[\u0020-\u007e])*"|[!#$%&'*+.0-9A-Z^_`a-z|~-]+) */g
+var TEXT_REGEXP = /^[\u0020-\u007e\u0080-\u00ff]+$/
+var TOKEN_REGEXP = /^[!#$%&'*+.0-9A-Z^_`a-z|~-]+$/
 
 /**
  * RegExp to match quoted-pair in RFC 2616
@@ -37,12 +37,12 @@ var tokenRegExp = /^[!#$%&'\*\+\-\.0-9A-Z\^_`a-z\|~]+$/
  * quoted-pair = "\" CHAR
  * CHAR        = <any US-ASCII character (octets 0 - 127)>
  */
-var qescRegExp = /\\([\u0000-\u007f])/g;
+var QESC_REGEXP = /\\([\u0000-\u007f])/g
 
 /**
  * RegExp to match chars that must be quoted-pair in RFC 2616
  */
-var quoteRegExp = /([\\"])/g;
+var QUOTE_REGEXP = /([\\"])/g
 
 /**
  * RegExp to match type in RFC 6838
@@ -60,9 +60,9 @@ var quoteRegExp = /([\\"])/g;
  * ALPHA =  %x41-5A / %x61-7A   ; A-Z / a-z
  * DIGIT =  %x30-39             ; 0-9
  */
-var subtypeNameRegExp = /^[A-Za-z0-9][A-Za-z0-9!#$&^_.-]{0,126}$/
-var typeNameRegExp = /^[A-Za-z0-9][A-Za-z0-9!#$&^_-]{0,126}$/
-var typeRegExp = /^ *([A-Za-z0-9][A-Za-z0-9!#$&^_-]{0,126})\/([A-Za-z0-9][A-Za-z0-9!#$&^_.+-]{0,126}) *$/;
+var SUBTYPE_NAME_REGEXP = /^[A-Za-z0-9][A-Za-z0-9!#$&^_.-]{0,126}$/
+var TYPE_NAME_REGEXP = /^[A-Za-z0-9][A-Za-z0-9!#$&^_-]{0,126}$/
+var TYPE_REGEXP = /^ *([A-Za-z0-9][A-Za-z0-9!#$&^_-]{0,126})\/([A-Za-z0-9][A-Za-z0-9!#$&^_.+-]{0,126}) *$/
 
 /**
  * Module exports.
@@ -79,7 +79,7 @@ exports.parse = parse
  * @public
  */
 
-function format(obj) {
+function format (obj) {
   if (!obj || typeof obj !== 'object') {
     throw new TypeError('argument obj is required')
   }
@@ -89,11 +89,11 @@ function format(obj) {
   var suffix = obj.suffix
   var type = obj.type
 
-  if (!type || !typeNameRegExp.test(type)) {
+  if (!type || !TYPE_NAME_REGEXP.test(type)) {
     throw new TypeError('invalid type')
   }
 
-  if (!subtype || !subtypeNameRegExp.test(subtype)) {
+  if (!subtype || !SUBTYPE_NAME_REGEXP.test(subtype)) {
     throw new TypeError('invalid subtype')
   }
 
@@ -102,7 +102,7 @@ function format(obj) {
 
   // append +suffix
   if (suffix) {
-    if (!typeNameRegExp.test(suffix)) {
+    if (!TYPE_NAME_REGEXP.test(suffix)) {
       throw new TypeError('invalid suffix')
     }
 
@@ -117,7 +117,7 @@ function format(obj) {
     for (var i = 0; i < params.length; i++) {
       param = params[i]
 
-      if (!tokenRegExp.test(param)) {
+      if (!TOKEN_REGEXP.test(param)) {
         throw new TypeError('invalid parameter name')
       }
 
@@ -136,7 +136,7 @@ function format(obj) {
  * @public
  */
 
-function parse(string) {
+function parse (string) {
   if (!string) {
     throw new TypeError('argument string is required')
   }
@@ -156,9 +156,9 @@ function parse(string) {
   var params = {}
   var value
 
-  paramRegExp.lastIndex = index
+  PARAM_REGEXP.lastIndex = index
 
-  while (match = paramRegExp.exec(string)) {
+  while ((match = PARAM_REGEXP.exec(string))) {
     if (match.index !== index) {
       throw new TypeError('invalid parameter format')
     }
@@ -171,7 +171,7 @@ function parse(string) {
       // remove quotes and escapes
       value = value
         .substr(1, value.length - 2)
-        .replace(qescRegExp, '$1')
+        .replace(QESC_REGEXP, '$1')
     }
 
     params[key] = value
@@ -194,19 +194,19 @@ function parse(string) {
  * @private
  */
 
-function qstring(val) {
+function qstring (val) {
   var str = String(val)
 
   // no need to quote tokens
-  if (tokenRegExp.test(str)) {
+  if (TOKEN_REGEXP.test(str)) {
     return str
   }
 
-  if (str.length > 0 && !textRegExp.test(str)) {
+  if (str.length > 0 && !TEXT_REGEXP.test(str)) {
     throw new TypeError('invalid parameter value')
   }
 
-  return '"' + str.replace(quoteRegExp, '\\$1') + '"'
+  return '"' + str.replace(QUOTE_REGEXP, '\\$1') + '"'
 }
 
 /**
@@ -217,8 +217,8 @@ function qstring(val) {
  * @private
  */
 
-function splitType(string) {
-  var match = typeRegExp.exec(string.toLowerCase())
+function splitType (string) {
+  var match = TYPE_REGEXP.exec(string.toLowerCase())
 
   if (!match) {
     throw new TypeError('invalid media type')
