@@ -7,6 +7,7 @@ a module to parse the `Content-Type` or similar HTTP headers, use the
 
   * Remove parameter handling, which is outside RFC 6838 scope
   * Remove `parse(req)` and `parse(res)` signatures
+  * perf: enable strict mode
   * perf: use a class for object creation
 
 0.3.0 / 2014-09-07

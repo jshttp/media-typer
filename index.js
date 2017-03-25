@@ -4,6 +4,8 @@
  * MIT Licensed
  */
 
+'use strict'
+
 /**
  * RegExp to match type in RFC 6838
  *
