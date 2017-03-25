@@ -28,11 +28,15 @@ $ npm install media-typer
 
 ## API
 
+<!-- eslint-disable no-unused-vars -->
+
 ```js
 var typer = require('media-typer')
 ```
 
 ### typer.parse(string)
+
+<!-- eslint-disable no-undef, no-unused-vars -->
 
 ```js
 var obj = typer.parse('image/svg+xml')
@@ -48,6 +52,8 @@ properties (examples are shown for the string `'image/svg+xml; charset=utf-8'`):
  - `suffix`: The suffix of the media type (always lower case). Example: `'xml'`
 
 ### typer.format(obj)
+
+<!-- eslint-disable no-undef, no-unused-vars -->
 
 ```js
 var obj = typer.format({type: 'image', subtype: 'svg', suffix: 'xml'})
