@@ -1,6 +1,7 @@
 unreleased
 ==========
 
+  * Remove parameter handling, which is outside RFC 6838 scope
   * Remove `parse(req)` and `parse(res)` signatures
     - Use the `content-type` module for content type parsing
   * perf: use a class for object creation

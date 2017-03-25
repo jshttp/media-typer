@@ -5,46 +5,6 @@
  */
 
 /**
- * RegExp to match *( ";" parameter ) in RFC 2616 sec 3.7
- *
- * parameter     = token "=" ( token | quoted-string )
- * token         = 1*<any CHAR except CTLs or separators>
- * separators    = "(" | ")" | "<" | ">" | "@"
- *               | "," | ";" | ":" | "\" | <">
- *               | "/" | "[" | "]" | "?" | "="
- *               | "{" | "}" | SP | HT
- * quoted-string = ( <"> *(qdtext | quoted-pair ) <"> )
- * qdtext        = <any TEXT except <">>
- * quoted-pair   = "\" CHAR
- * CHAR          = <any US-ASCII character (octets 0 - 127)>
- * TEXT          = <any OCTET except CTLs, but including LWS>
- * LWS           = [CRLF] 1*( SP | HT )
- * CRLF          = CR LF
- * CR            = <US-ASCII CR, carriage return (13)>
- * LF            = <US-ASCII LF, linefeed (10)>
- * SP            = <US-ASCII SP, space (32)>
- * SHT           = <US-ASCII HT, horizontal-tab (9)>
- * CTL           = <any US-ASCII control character (octets 0 - 31) and DEL (127)>
- * OCTET         = <any 8-bit sequence of data>
- */
-var PARAM_REGEXP = /; *([!#$%&'*+.0-9A-Z^_`a-z|~-]+) *= *("(?:[ !\u0023-\u005b\u005d-\u007e\u0080-\u00ff]|\\[\u0020-\u007e])*"|[!#$%&'*+.0-9A-Z^_`a-z|~-]+) */g
-var TEXT_REGEXP = /^[\u0020-\u007e\u0080-\u00ff]+$/
-var TOKEN_REGEXP = /^[!#$%&'*+.0-9A-Z^_`a-z|~-]+$/
-
-/**
- * RegExp to match quoted-pair in RFC 2616
- *
- * quoted-pair = "\" CHAR
- * CHAR        = <any US-ASCII character (octets 0 - 127)>
- */
-var QESC_REGEXP = /\\([\u0000-\u007f])/g
-
-/**
- * RegExp to match chars that must be quoted-pair in RFC 2616
- */
-var QUOTE_REGEXP = /([\\"])/g
-
-/**
  * RegExp to match type in RFC 6838
  *
  * type-name = restricted-name
@@ -84,7 +44,6 @@ function format (obj) {
     throw new TypeError('argument obj is required')
   }
 
-  var parameters = obj.parameters
   var subtype = obj.subtype
   var suffix = obj.suffix
   var type = obj.type
@@ -109,22 +68,6 @@ function format (obj) {
     string += '+' + suffix
   }
 
-  // append parameters
-  if (parameters && typeof parameters === 'object') {
-    var param
-    var params = Object.keys(parameters).sort()
-
-    for (var i = 0; i < params.length; i++) {
-      param = params[i]
-
-      if (!TOKEN_REGEXP.test(param)) {
-        throw new TypeError('invalid parameter name')
-      }
-
-      string += '; ' + param + '=' + qstring(parameters[param])
-    }
-  }
-
   return string
 }
 
@@ -145,76 +88,6 @@ function parse (string) {
     throw new TypeError('argument string is required to be a string')
   }
 
-  var index = string.indexOf(';')
-  var type = index !== -1
-    ? string.substr(0, index)
-    : string
-
-  var key
-  var match
-  var obj = splitType(type)
-  var value
-
-  PARAM_REGEXP.lastIndex = index
-
-  while ((match = PARAM_REGEXP.exec(string))) {
-    if (match.index !== index) {
-      throw new TypeError('invalid parameter format')
-    }
-
-    index += match[0].length
-    key = match[1].toLowerCase()
-    value = match[2]
-
-    if (value[0] === '"') {
-      // remove quotes and escapes
-      value = value
-        .substr(1, value.length - 2)
-        .replace(QESC_REGEXP, '$1')
-    }
-
-    obj.parameters[key] = value
-  }
-
-  if (index !== -1 && index !== string.length) {
-    throw new TypeError('invalid parameter format')
-  }
-
-  return obj
-}
-
-/**
- * Quote a string if necessary.
- *
- * @param {string} val
- * @return {string}
- * @private
- */
-
-function qstring (val) {
-  var str = String(val)
-
-  // no need to quote tokens
-  if (TOKEN_REGEXP.test(str)) {
-    return str
-  }
-
-  if (str.length > 0 && !TEXT_REGEXP.test(str)) {
-    throw new TypeError('invalid parameter value')
-  }
-
-  return '"' + str.replace(QUOTE_REGEXP, '\\$1') + '"'
-}
-
-/**
- * Split "type/subtype+siffx" into parts.
- *
- * @param {string} string
- * @return {Object}
- * @private
- */
-
-function splitType (string) {
   var match = TYPE_REGEXP.exec(string.toLowerCase())
 
   if (!match) {

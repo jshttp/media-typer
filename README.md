@@ -27,7 +27,7 @@ var typer = require('media-typer')
 ### typer.parse(string)
 
 ```js
-var obj = typer.parse('image/svg+xml; charset=utf-8')
+var obj = typer.parse('image/svg+xml')
 ```
 
 Parse a media type string. This will return an object with the following
@@ -38,8 +38,6 @@ properties (examples are shown for the string `'image/svg+xml; charset=utf-8'`):
  - `subtype`: The subtype of the media type (always lower case). Example: `'svg'`
 
  - `suffix`: The suffix of the media type (always lower case). Example: `'xml'`
-
- - `parameters`: An object of the parameters in the media type (name of parameter always lower case). Example: `{charset: 'utf-8'}`
 
 ### typer.format(obj)
 
