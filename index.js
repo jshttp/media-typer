@@ -153,7 +153,6 @@ function parse (string) {
   var key
   var match
   var obj = splitType(type)
-  var params = {}
   var value
 
   PARAM_REGEXP.lastIndex = index
@@ -174,14 +173,12 @@ function parse (string) {
         .replace(QESC_REGEXP, '$1')
     }
 
-    params[key] = value
+    obj.parameters[key] = value
   }
 
   if (index !== -1 && index !== string.length) {
     throw new TypeError('invalid parameter format')
   }
-
-  obj.parameters = params
 
   return obj
 }
@@ -235,11 +232,17 @@ function splitType (string) {
     subtype = subtype.substr(0, index)
   }
 
-  var obj = {
-    type: type,
-    subtype: subtype,
-    suffix: suffix
-  }
+  return new MediaType(type, subtype, suffix)
+}
 
-  return obj
+/**
+ * Class for MediaType object.
+ * @public
+ */
+
+function MediaType (type, subtype, suffix) {
+  this.type = type
+  this.subtype = subtype
+  this.suffix = suffix
+  this.parameters = Object.create(null)
 }

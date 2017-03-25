@@ -3,6 +3,7 @@ unreleased
 
   * Remove `parse(req)` and `parse(res)` signatures
     - Use the `content-type` module for content type parsing
+  * perf: use a class for object creation
 
 0.3.0 / 2014-09-07
 ==================
