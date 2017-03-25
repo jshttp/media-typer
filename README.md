@@ -6,7 +6,11 @@
 [![Build Status][travis-image]][travis-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
 
-Simple RFC 6838 media type parser
+Simple RFC 6838 media type parser.
+
+This module will parse a given media type into it's component parts, like type,
+subtype, and suffix. A formatter is also provided to put them back together and
+the two can be combined to normalize media types into a canonical form.
 
 ## Installation
 
