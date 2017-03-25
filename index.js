@@ -210,7 +210,7 @@ function qstring (val) {
 }
 
 /**
- * Simply "type/subtype+siffx" into parts.
+ * Split "type/subtype+siffx" into parts.
  *
  * @param {string} string
  * @return {Object}
