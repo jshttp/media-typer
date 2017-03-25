@@ -12,6 +12,10 @@ This module will parse a given media type into it's component parts, like type,
 subtype, and suffix. A formatter is also provided to put them back together and
 the two can be combined to normalize media types into a canonical form.
 
+If you are looking to parse the string that represents a media type and it's
+parameters in HTTP (for example, the `Content-Type` header), use the
+[content-type module](https://www.npmjs.com/package/content-type).
+
 ## Installation
 
 This is a [Node.js](https://nodejs.org/en/) module available through the
