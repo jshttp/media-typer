@@ -63,6 +63,16 @@ describe('typer.parse(string)', function () {
     assert.equal(type.type, 'text')
     assert.equal(type.subtype, 'html')
   })
+  it('should parse basic json type with encoding', function () {
+    var type = typer.parse('application/json;charset=UTF-8;')
+    assert.equal(type.type, 'application')
+    assert.equal(type.subtype, 'json')
+  })
+  it('should parse basic json type with encoding without semicolon', function () {
+    var type = typer.parse('application/json;charset=UTF-8')
+    assert.equal(type.type, 'application')
+    assert.equal(type.subtype, 'json')
+  })
 
   it('should parse with suffix', function () {
     var type = typer.parse('image/svg+xml')
