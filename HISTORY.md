@@ -5,6 +5,7 @@ This major release brings the module back to it's RFC 6838 roots. If you want
 a module to parse the `Content-Type` or similar HTTP headers, use the
 `content-type` module instead.
 
+  * Drop support for Node.js below 0.8
   * Remove parameter handling, which is outside RFC 6838 scope
   * Remove `parse(req)` and `parse(res)` signatures
   * perf: enable strict mode
