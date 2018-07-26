@@ -18,12 +18,12 @@ var invalidTypes = [
 describe('typer.format(obj)', function () {
   it('should format basic type', function () {
     var str = typer.format({type: 'text', subtype: 'html'})
-    assert.equal(str, 'text/html')
+    assert.strictEqual(str, 'text/html')
   })
 
   it('should format type with suffix', function () {
     var str = typer.format({type: 'image', subtype: 'svg', suffix: 'xml'})
-    assert.equal(str, 'image/svg+xml')
+    assert.strictEqual(str, 'image/svg+xml')
   })
 
   it('should require argument', function () {
@@ -60,22 +60,22 @@ describe('typer.format(obj)', function () {
 describe('typer.parse(string)', function () {
   it('should parse basic type', function () {
     var type = typer.parse('text/html')
-    assert.equal(type.type, 'text')
-    assert.equal(type.subtype, 'html')
+    assert.strictEqual(type.type, 'text')
+    assert.strictEqual(type.subtype, 'html')
   })
 
   it('should parse with suffix', function () {
     var type = typer.parse('image/svg+xml')
-    assert.equal(type.type, 'image')
-    assert.equal(type.subtype, 'svg')
-    assert.equal(type.suffix, 'xml')
+    assert.strictEqual(type.type, 'image')
+    assert.strictEqual(type.subtype, 'svg')
+    assert.strictEqual(type.suffix, 'xml')
   })
 
   it('should lower-case type', function () {
     var type = typer.parse('IMAGE/SVG+XML')
-    assert.equal(type.type, 'image')
-    assert.equal(type.subtype, 'svg')
-    assert.equal(type.suffix, 'xml')
+    assert.strictEqual(type.type, 'image')
+    assert.strictEqual(type.subtype, 'svg')
+    assert.strictEqual(type.suffix, 'xml')
   })
 
   invalidTypes.forEach(function (type) {
