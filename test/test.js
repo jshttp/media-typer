@@ -17,12 +17,12 @@ var invalidTypes = [
 
 describe('typer.format(obj)', function () {
   it('should format basic type', function () {
-    var str = typer.format({type: 'text', subtype: 'html'})
+    var str = typer.format({ type: 'text', subtype: 'html' })
     assert.strictEqual(str, 'text/html')
   })
 
   it('should format type with suffix', function () {
-    var str = typer.format({type: 'image', subtype: 'svg', suffix: 'xml'})
+    var str = typer.format({ type: 'image', subtype: 'svg', suffix: 'xml' })
     assert.strictEqual(str, 'image/svg+xml')
   })
 
@@ -39,20 +39,20 @@ describe('typer.format(obj)', function () {
   })
 
   it('should reject invalid type', function () {
-    assert.throws(typer.format.bind(null, {type: 'text/'}), /invalid type/)
+    assert.throws(typer.format.bind(null, { type: 'text/' }), /invalid type/)
   })
 
   it('should require subtype', function () {
-    assert.throws(typer.format.bind(null, {type: 'text'}), /invalid subtype/)
+    assert.throws(typer.format.bind(null, { type: 'text' }), /invalid subtype/)
   })
 
   it('should reject invalid subtype', function () {
-    var obj = {type: 'text', subtype: 'html/'}
+    var obj = { type: 'text', subtype: 'html/' }
     assert.throws(typer.format.bind(null, obj), /invalid subtype/)
   })
 
   it('should reject invalid suffix', function () {
-    var obj = {type: 'image', subtype: 'svg', suffix: 'xml\\'}
+    var obj = { type: 'image', subtype: 'svg', suffix: 'xml\\' }
     assert.throws(typer.format.bind(null, obj), /invalid suffix/)
   })
 })

@@ -56,7 +56,7 @@ properties (examples are shown for the string `'image/svg+xml; charset=utf-8'`):
 <!-- eslint-disable no-undef, no-unused-vars -->
 
 ```js
-var obj = typer.format({type: 'image', subtype: 'svg', suffix: 'xml'})
+var obj = typer.format({ type: 'image', subtype: 'svg', suffix: 'xml' })
 ```
 
 Format an object into a media type string. This will return a string of the
