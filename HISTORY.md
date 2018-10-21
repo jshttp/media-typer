@@ -1,5 +1,5 @@
-unreleased
-==========
+1.0.0 / 2018-10-20
+==================
 
 This major release brings the module back to it's RFC 6838 roots. If you want
 a module to parse the `Content-Type` or similar HTTP headers, use the
