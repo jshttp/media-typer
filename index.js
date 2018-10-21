@@ -119,5 +119,4 @@ function MediaType (type, subtype, suffix) {
   this.type = type
   this.subtype = subtype
   this.suffix = suffix
-  this.parameters = Object.create(null)
 }
