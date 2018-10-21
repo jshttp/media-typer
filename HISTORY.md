@@ -1,5 +1,5 @@
-unreleased
-==========
+1.0.1 / 2018-10-20
+==================
 
   * Remove left over `parameters` property from class
 
