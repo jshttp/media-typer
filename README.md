@@ -1,7 +1,7 @@
 # media-typer
 
-[![NPM Version][npm-image]][npm-url]
-[![NPM Downloads][downloads-image]][downloads-url]
+[![NPM Version][npm-version-image]][npm-url]
+[![NPM Downloads][npm-downloads-image]][npm-url]
 [![Node.js Version][node-version-image]][node-version-url]
 [![Build Status][travis-image]][travis-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
@@ -67,13 +67,12 @@ documentation for `typer.parse(string)`.
 
 [MIT](LICENSE)
 
-[npm-image]: https://img.shields.io/npm/v/media-typer.svg
+[coveralls-image]: https://badgen.net/coveralls/c/github/jshttp/media-typer/master
+[coveralls-url]: https://coveralls.io/r/jshttp/media-typer?branch=master
+[node-version-image]: https://badgen.net/npm/node/media-typer
+[node-version-url]: https://nodejs.org/en/download
+[npm-downloads-image]: https://badgen.net/npm/dm/media-typer
 [npm-url]: https://npmjs.org/package/media-typer
-[node-version-image]: https://img.shields.io/node/v/media-typer.svg
-[node-version-url]: https://nodejs.org/en/download/
-[travis-image]: https://img.shields.io/travis/jshttp/media-typer.svg
+[npm-version-image]: https://badgen.net/npm/v/media-typer
+[travis-image]: https://badgen.net/travis/jshttp/media-typer/master
 [travis-url]: https://travis-ci.org/jshttp/media-typer
-[coveralls-image]: https://img.shields.io/coveralls/jshttp/media-typer.svg
-[coveralls-url]: https://coveralls.io/r/jshttp/media-typer
-[downloads-image]: https://img.shields.io/npm/dm/media-typer.svg
-[downloads-url]: https://npmjs.org/package/media-typer
