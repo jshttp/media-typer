@@ -51,6 +51,8 @@ properties (examples are shown for the string `'image/svg+xml; charset=utf-8'`):
 
  - `suffix`: The suffix of the media type (always lower case). Example: `'xml'`
 
+If the given type string is invalid, then a `TypeError` is thrown.
+
 ### typer.format(obj)
 
 <!-- eslint-disable no-undef, no-unused-vars -->
@@ -62,6 +64,8 @@ var obj = typer.format({ type: 'image', subtype: 'svg', suffix: 'xml' })
 Format an object into a media type string. This will return a string of the
 mime type for the given object. For the properties of the object, see the
 documentation for `typer.parse(string)`.
+
+If any of the given object values are invalid, then a `TypeError` is thrown.
 
 ## License
 
