@@ -1,3 +1,8 @@
+unreleased
+==========
+
+  * Fix JSDoc comment for `parse` function
+
 1.0.1 / 2018-10-20
 ==================
 

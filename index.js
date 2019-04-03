@@ -76,8 +76,8 @@ function format (obj) {
 /**
  * Parse media type to object.
  *
- * @param {string|object} string
- * @return {Object}
+ * @param {string} string
+ * @return {object}
  * @public
  */
 
