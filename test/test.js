@@ -79,7 +79,7 @@ describe('typer.parse(string)', function () {
   })
 
   invalidTypes.forEach(function (type) {
-    it('should throw on invalid media type ' + type, function () {
+    it('should throw on invalid media type ' + JSON.stringify(type), function () {
       assert.throws(typer.parse.bind(null, type), /invalid media type/)
     })
   })
