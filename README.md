@@ -67,6 +67,17 @@ documentation for `typer.parse(string)`.
 
 If any of the given object values are invalid, then a `TypeError` is thrown.
 
+### typer.test(string)
+
+<!-- eslint-disable no-undef, no-unused-vars -->
+
+```js
+var valid = typer.test('image/svg+xml')
+```
+
+Validate a media type string. This will return `true` is the string is a well-
+formatted media type, or `false` otherwise.
+
 ## License
 
 [MIT](LICENSE)

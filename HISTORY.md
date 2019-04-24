@@ -1,3 +1,8 @@
+unreleased
+==========
+
+  * Add `test(string)` function
+
 1.0.2 / 2019-04-19
 ==================
 

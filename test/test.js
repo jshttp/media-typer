@@ -92,3 +92,31 @@ describe('typer.parse(string)', function () {
     assert.throws(typer.parse.bind(null, 7), /string.*required/)
   })
 })
+
+describe('typer.test(string)', function () {
+  it('should pass basic type', function () {
+    assert.strictEqual(typer.test('text/html'), true)
+  })
+
+  it('should pass with suffix', function () {
+    assert.strictEqual(typer.test('image/svg+xml'), true)
+  })
+
+  it('should pass upper-case type', function () {
+    assert.strictEqual(typer.test('IMAGE/SVG+XML'), true)
+  })
+
+  invalidTypes.forEach(function (type) {
+    it('should fail invalid media type ' + JSON.stringify(type), function () {
+      assert.strictEqual(typer.test(type), false)
+    })
+  })
+
+  it('should require argument', function () {
+    assert.throws(typer.test.bind(null), /string.*required/)
+  })
+
+  it('should reject non-strings', function () {
+    assert.throws(typer.test.bind(null, 7), /string.*required/)
+  })
+})

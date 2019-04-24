@@ -32,6 +32,7 @@ var TYPE_REGEXP = /^ *([A-Za-z0-9][A-Za-z0-9!#$&^_-]{0,126})\/([A-Za-z0-9][A-Za-
 
 exports.format = format
 exports.parse = parse
+exports.test = test
 
 /**
  * Format object to media type.
@@ -71,6 +72,26 @@ function format (obj) {
   }
 
   return string
+}
+
+/**
+ * Test media type.
+ *
+ * @param {string} string
+ * @return {object}
+ * @public
+ */
+
+function test (string) {
+  if (!string) {
+    throw new TypeError('argument string is required')
+  }
+
+  if (typeof string !== 'string') {
+    throw new TypeError('argument string is required to be a string')
+  }
+
+  return TYPE_REGEXP.test(string.toLowerCase())
 }
 
 /**
