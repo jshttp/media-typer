@@ -52,11 +52,11 @@ function format (obj) {
   var type = obj.type
 
   if (!type || !TYPE_NAME_REGEXP.test(type)) {
-    throw new TypeError('invalid type')
+    throw new TypeError('invalid type \'' + type + '\'')
   }
 
   if (!subtype || !SUBTYPE_NAME_REGEXP.test(subtype)) {
-    throw new TypeError('invalid subtype')
+    throw new TypeError('invalid subtype \'' + subtype + '\'')
   }
 
   // format as type/subtype
@@ -114,7 +114,7 @@ function parse (string) {
   var match = TYPE_REGEXP.exec(string.toLowerCase())
 
   if (!match) {
-    throw new TypeError('invalid media type')
+    throw new TypeError('invalid media type \'' + string + '\'')
   }
 
   var type = match[1]
