@@ -8,11 +8,11 @@
 
 Simple RFC 6838 media type parser.
 
-This module will parse a given media type into it's component parts, like type,
+This module will parse a given media type into its component parts, like type,
 subtype, and suffix. A formatter is also provided to put them back together and
 the two can be combined to normalize media types into a canonical form.
 
-If you are looking to parse the string that represents a media type and it's
+If you are looking to parse the string that represents a media type and its
 parameters in HTTP (for example, the `Content-Type` header), use the
 [content-type module](https://www.npmjs.com/package/content-type).
 
@@ -75,7 +75,7 @@ If any of the given object values are invalid, then a `TypeError` is thrown.
 var valid = typer.test('image/svg+xml')
 ```
 
-Validate a media type string. This will return `true` is the string is a well-
+Validate a media type string. This will return `true` if the string is a well-
 formatted media type, or `false` otherwise.
 
 ## License
