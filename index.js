@@ -21,10 +21,11 @@
  *                              ; specify a structured syntax suffix
  * ALPHA =  %x41-5A / %x61-7A   ; A-Z / a-z
  * DIGIT =  %x30-39             ; 0-9
+ * OWS   =  *( SP / HTAB )      ; might be surrounded by optional whitespace
  */
 var SUBTYPE_NAME_REGEXP = /^[A-Za-z0-9][A-Za-z0-9!#$&^_.-]{0,126}$/
 var TYPE_NAME_REGEXP = /^[A-Za-z0-9][A-Za-z0-9!#$&^_-]{0,126}$/
-var TYPE_REGEXP = /^ *([A-Za-z0-9][A-Za-z0-9!#$&^_-]{0,126})\/([A-Za-z0-9][A-Za-z0-9!#$&^_.+-]{0,126}) *$/
+var TYPE_REGEXP = /^[ \t]*([A-Za-z0-9][A-Za-z0-9!#$&^_-]{0,126})\/([A-Za-z0-9][A-Za-z0-9!#$&^_.+-]{0,126})[ \t]*$/
 
 /**
  * Module exports.

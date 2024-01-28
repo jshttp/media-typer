@@ -71,6 +71,18 @@ describe('typer.parse(string)', function () {
     assert.strictEqual(type.suffix, 'xml')
   })
 
+  it('should support spaces', function () {
+    var type = typer.parse(' image/svg ')
+    assert.strictEqual(type.type, 'image')
+    assert.strictEqual(type.subtype, 'svg')
+  })
+
+  it('should support tabs', function () {
+    var type = typer.parse("\ttext/html\t")
+    assert.strictEqual(type.type, 'text')
+    assert.strictEqual(type.subtype, 'html')
+  })
+
   it('should lower-case type', function () {
     var type = typer.parse('IMAGE/SVG+XML')
     assert.strictEqual(type.type, 'image')
