@@ -1,9 +1,9 @@
 # media-typer
 
-[![NPM Version][npm-version-image]][npm-url]
-[![NPM Downloads][npm-downloads-image]][npm-url]
+[![NPM Version][npm-image]][npm-url]
+[![NPM Downloads][downloads-image]][downloads-url]
 [![Node.js Version][node-version-image]][node-version-url]
-[![Build Status][travis-image]][travis-url]
+[![Build Status][ci-image]][ci-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
 
 Simple RFC 6838 media type parser.
@@ -82,12 +82,13 @@ formatted media type, or `false` otherwise.
 
 [MIT](LICENSE)
 
-[coveralls-image]: https://badgen.net/coveralls/c/github/jshttp/media-typer/master
-[coveralls-url]: https://coveralls.io/r/jshttp/media-typer?branch=master
-[node-version-image]: https://badgen.net/npm/node/media-typer
-[node-version-url]: https://nodejs.org/en/download
-[npm-downloads-image]: https://badgen.net/npm/dm/media-typer
+[ci-image]: https://img.shields.io/github/workflow/status/jshttp/media-typer/ci/master?label=ci
+[ci-url]: https://github.com/jshttp/media-typer/actions/workflows/ci.yml
+[npm-image]: https://img.shields.io/npm/v/media-typer.svg
 [npm-url]: https://npmjs.org/package/media-typer
-[npm-version-image]: https://badgen.net/npm/v/media-typer
-[travis-image]: https://badgen.net/travis/jshttp/media-typer/master
-[travis-url]: https://travis-ci.org/jshttp/media-typer
+[node-version-image]: https://img.shields.io/node/v/media-typer.svg
+[node-version-url]: https://nodejs.org/en/
+[coveralls-image]: https://img.shields.io/coveralls/jshttp/media-typer/master.svg
+[coveralls-url]: https://coveralls.io/r/jshttp/media-typer?branch=master
+[downloads-image]: https://img.shields.io/npm/dm/media-typer.svg
+[downloads-url]: https://npmjs.org/package/media-typer
