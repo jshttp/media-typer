@@ -5,6 +5,10 @@
   "author": "Douglas Christopher Wilson <doug@somethingdoug.com>",
   "license": "MIT",
   "repository": "jshttp/media-typer",
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/express"
+  },
   "devDependencies": {
     "eslint": "7.23.0",
     "eslint-config-standard": "14.1.1",
