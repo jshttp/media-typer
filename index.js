@@ -124,8 +124,8 @@ function parse (string) {
   // suffix after last +
   var index = subtype.lastIndexOf('+')
   if (index !== -1) {
-    suffix = subtype.substr(index + 1)
-    subtype = subtype.substr(0, index)
+    suffix = subtype.slice(index + 1)
+    subtype = subtype.slice(0, index)
   }
 
   return new MediaType(type, subtype, suffix)
