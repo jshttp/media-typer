@@ -1,10 +1,9 @@
 # media-typer
 
-[![NPM Version][npm-image]][npm-url]
-[![NPM Downloads][downloads-image]][downloads-url]
-[![Node.js Version][node-version-image]][node-version-url]
+[![NPM Version][npm-version-image]][npm-url]
+[![NPM Downloads][npm-downloads-image]][npm-url]
 [![Build Status][ci-image]][ci-url]
-[![Test Coverage][coveralls-image]][coveralls-url]
+[![Coverage Status][coverage-image]][coverage-url]
 
 Simple RFC 6838 media type parser.
 
@@ -31,7 +30,7 @@ $ npm install media-typer
 <!-- eslint-disable no-unused-vars -->
 
 ```js
-var typer = require('media-typer')
+var typer = require("media-typer");
 ```
 
 ### typer.parse(string)
@@ -39,17 +38,17 @@ var typer = require('media-typer')
 <!-- eslint-disable no-undef, no-unused-vars -->
 
 ```js
-var obj = typer.parse('image/svg+xml')
+var obj = typer.parse("image/svg+xml");
 ```
 
 Parse a media type string. This will return an object with the following
 properties (examples are shown for the string `'image/svg+xml; charset=utf-8'`):
 
- - `type`: The type of the media type (always lower case). Example: `'image'`
+- `type`: The type of the media type (always lower case). Example: `'image'`
 
- - `subtype`: The subtype of the media type (always lower case). Example: `'svg'`
+- `subtype`: The subtype of the media type (always lower case). Example: `'svg'`
 
- - `suffix`: The suffix of the media type (always lower case). Example: `'xml'`
+- `suffix`: The suffix of the media type (always lower case). Example: `'xml'`
 
 If the given type string is invalid, then a `TypeError` is thrown.
 
@@ -58,7 +57,7 @@ If the given type string is invalid, then a `TypeError` is thrown.
 <!-- eslint-disable no-undef, no-unused-vars -->
 
 ```js
-var obj = typer.format({ type: 'image', subtype: 'svg', suffix: 'xml' })
+var obj = typer.format({ type: "image", subtype: "svg", suffix: "xml" });
 ```
 
 Format an object into a media type string. This will return a string of the
@@ -72,7 +71,7 @@ If any of the given object values are invalid, then a `TypeError` is thrown.
 <!-- eslint-disable no-undef, no-unused-vars -->
 
 ```js
-var valid = typer.test('image/svg+xml')
+var valid = typer.test("image/svg+xml");
 ```
 
 Validate a media type string. This will return `true` if the string is a well-
@@ -82,13 +81,10 @@ formatted media type, or `false` otherwise.
 
 [MIT](LICENSE)
 
-[ci-image]: https://img.shields.io/github/workflow/status/jshttp/media-typer/ci/master?label=ci
-[ci-url]: https://github.com/jshttp/media-typer/actions/workflows/ci.yml
-[npm-image]: https://img.shields.io/npm/v/media-typer.svg
+[ci-image]: https://img.shields.io/github/actions/workflow/status/jshttp/media-typer/ci.yml
+[ci-url]: https://github.com/jshttp/media-typer/actions/workflows/ci.yml?query=branch%3Amaster
+[coverage-image]: https://img.shields.io/codecov/c/github/jshttp/media-typer/master
+[coverage-url]: https://app.codecov.io/gh/jshttp/media-typer
+[npm-downloads-image]: https://img.shields.io/npm/dm/media-typer
 [npm-url]: https://npmjs.org/package/media-typer
-[node-version-image]: https://img.shields.io/node/v/media-typer.svg
-[node-version-url]: https://nodejs.org/en/
-[coveralls-image]: https://img.shields.io/coveralls/jshttp/media-typer/master.svg
-[coveralls-url]: https://coveralls.io/r/jshttp/media-typer?branch=master
-[downloads-image]: https://img.shields.io/npm/dm/media-typer.svg
-[downloads-url]: https://npmjs.org/package/media-typer
+[npm-version-image]: https://img.shields.io/npm/v/media-typer
