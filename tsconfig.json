@@ -1,6 +1,9 @@
 {
   "extends": "@borderless/ts-scripts/configs/tsconfig.json",
   "compilerOptions": {
+    "target": "es2022",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
     "outDir": "dist",
     "rootDir": "src"
   },
