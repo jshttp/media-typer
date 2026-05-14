@@ -30,7 +30,7 @@ $ npm install media-typer
 <!-- eslint-disable no-unused-vars -->
 
 ```js
-var typer = require("media-typer");
+import * as typer from "media-typer";
 ```
 
 ### typer.parse(string)
@@ -38,7 +38,7 @@ var typer = require("media-typer");
 <!-- eslint-disable no-undef, no-unused-vars -->
 
 ```js
-var obj = typer.parse("image/svg+xml");
+const obj = typer.parse("image/svg+xml");
 ```
 
 Parse a media type string. This will return an object with the following
@@ -57,7 +57,7 @@ If the given type string is invalid, then a `TypeError` is thrown.
 <!-- eslint-disable no-undef, no-unused-vars -->
 
 ```js
-var obj = typer.format({ type: "image", subtype: "svg", suffix: "xml" });
+const obj = typer.format({ type: "image", subtype: "svg", suffix: "xml" });
 ```
 
 Format an object into a media type string. This will return a string of the
@@ -71,7 +71,7 @@ If any of the given object values are invalid, then a `TypeError` is thrown.
 <!-- eslint-disable no-undef, no-unused-vars -->
 
 ```js
-var valid = typer.test("image/svg+xml");
+const valid = typer.test("image/svg+xml");
 ```
 
 Validate a media type string. This will return `true` if the string is a well-
