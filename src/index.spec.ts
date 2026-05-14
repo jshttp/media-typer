@@ -88,6 +88,13 @@ describe("typer.parse", () => {
     expect(type.suffix).toBe("xml");
   });
 
+  it("should parse with multiple + in subtype", () => {
+    const type = typer.parse("application/vnd.api+json+gzip");
+    expect(type.type).toBe("application");
+    expect(type.subtype).toBe("vnd.api+json");
+    expect(type.suffix).toBe("gzip");
+  });
+
   invalidTypes.forEach((type) => {
     it(`should throw on invalid media type ${JSON.stringify(type)}`, () => {
       expect(() => typer.parse(type)).toThrow(/Invalid media type/);
