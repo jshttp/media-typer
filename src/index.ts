@@ -14,10 +14,10 @@
  * ALPHA =  %x41-5A / %x61-7A   ; A-Z / a-z
  * DIGIT =  %x30-39             ; 0-9
  */
-const subtypeNameRegExp = /^[A-Za-z0-9][A-Za-z0-9!#$&^_.-]{0,126}$/;
+const subtypeNameRegExp = /^[A-Za-z0-9][A-Za-z0-9!#$&^_.+-]{0,126}$/;
 const typeNameRegExp = /^[A-Za-z0-9][A-Za-z0-9!#$&^_-]{0,126}$/;
 const typeRegExp =
-  /^ *([A-Za-z0-9][A-Za-z0-9!#$&^_-]{0,126})\/([A-Za-z0-9][A-Za-z0-9!#$&^_.+-]{0,126}) *$/;
+  /^[A-Za-z0-9][A-Za-z0-9!#$&^_-]{0,126}\/[A-Za-z0-9][A-Za-z0-9!#$&^_.+-]{0,126}$/;
 
 /**
  * Media type object.
@@ -41,27 +41,21 @@ export interface MediaType {
  * Format object to media type.
  */
 export function format(obj: MediaType): string {
-  if (!obj || typeof obj !== "object") {
-    throw new TypeError("argument obj is required");
-  }
-
-  const subtype = obj.subtype;
-  const suffix = obj.suffix;
-  const type = obj.type;
+  const { type, subtype, suffix } = obj;
 
   if (!type || !typeNameRegExp.test(type)) {
-    throw new TypeError("invalid type");
+    throw new TypeError(`Invalid type: ${type}`);
   }
 
   if (!subtype || !subtypeNameRegExp.test(subtype)) {
-    throw new TypeError("invalid subtype");
+    throw new TypeError(`Invalid subtype: ${subtype}`);
   }
 
   let str = type + "/" + subtype;
 
-  if (suffix) {
+  if (suffix !== undefined) {
     if (!typeNameRegExp.test(suffix)) {
-      throw new TypeError("invalid suffix");
+      throw new TypeError(`Invalid suffix: ${suffix}`);
     }
 
     str += "+" + suffix;
@@ -74,22 +68,13 @@ export function format(obj: MediaType): string {
  * Parse media type to object.
  */
 export function parse(str: string): MediaType {
-  if (!str) {
-    throw new TypeError("argument string is required");
+  if (!typeRegExp.test(str)) {
+    throw new TypeError(`Invalid media type: ${str}`);
   }
 
-  if (typeof str !== "string") {
-    throw new TypeError("argument string is required to be a string");
-  }
-
-  const match = typeRegExp.exec(str.toLowerCase());
-
-  if (!match) {
-    throw new TypeError("invalid media type");
-  }
-
-  const type = match[1];
-  let subtype = match[2];
+  const slashIndex = str.indexOf("/");
+  const type = str.slice(0, slashIndex).toLowerCase();
+  let subtype = str.slice(slashIndex + 1).toLowerCase();
   let suffix: string | undefined;
 
   const index = subtype.lastIndexOf("+");
@@ -105,13 +90,5 @@ export function parse(str: string): MediaType {
  * Test media type.
  */
 export function test(str: string): boolean {
-  if (!str) {
-    throw new TypeError("argument string is required");
-  }
-
-  if (typeof str !== "string") {
-    throw new TypeError("argument string is required to be a string");
-  }
-
-  return typeRegExp.test(str.toLowerCase());
+  return typeRegExp.test(str);
 }

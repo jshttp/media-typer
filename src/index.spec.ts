@@ -25,38 +25,45 @@ describe("typer.format", () => {
     expect(str).toBe("image/svg+xml");
   });
 
-  it("should require argument", () => {
-    expect(() => typer.format(undefined as never)).toThrow(/obj.*required/);
+  it("should maintain case", () => {
+    const str = typer.format({ type: "Text", subtype: "Html" });
+    expect(str).toBe("Text/Html");
   });
 
-  it("should reject non-objects", () => {
-    expect(() => typer.format(7 as never)).toThrow(/obj.*required/);
+  it("should allow + in subtype", () => {
+    const str = typer.format({ type: "application", subtype: "vnd.api+json" });
+    expect(str).toBe("application/vnd.api+json");
   });
 
   it("should require type", () => {
-    expect(() => typer.format({} as never)).toThrow(/invalid type/);
+    expect(() => typer.format({} as never)).toThrow(/Invalid type/);
   });
 
   it("should reject invalid type", () => {
     expect(() => typer.format({ type: "text/", subtype: "html" })).toThrow(
-      /invalid type/,
+      /Invalid type/,
     );
   });
 
   it("should require subtype", () => {
     expect(() => typer.format({ type: "text" } as never)).toThrow(
-      /invalid subtype/,
+      /Invalid subtype/,
     );
   });
 
   it("should reject invalid subtype", () => {
     const obj = { type: "text", subtype: "html/" };
-    expect(() => typer.format(obj)).toThrow(/invalid subtype/);
+    expect(() => typer.format(obj)).toThrow(/Invalid subtype/);
+  });
+
+  it("should reject empty suffix", () => {
+    const obj = { type: "text", subtype: "html", suffix: "" };
+    expect(() => typer.format(obj)).toThrow(/Invalid suffix/);
   });
 
   it("should reject invalid suffix", () => {
     const obj = { type: "image", subtype: "svg", suffix: "xml\\" };
-    expect(() => typer.format(obj)).toThrow(/invalid suffix/);
+    expect(() => typer.format(obj)).toThrow(/Invalid suffix/);
   });
 });
 
@@ -83,16 +90,8 @@ describe("typer.parse", () => {
 
   invalidTypes.forEach((type) => {
     it(`should throw on invalid media type ${JSON.stringify(type)}`, () => {
-      expect(() => typer.parse(type)).toThrow(/invalid media type/);
+      expect(() => typer.parse(type)).toThrow(/Invalid media type/);
     });
-  });
-
-  it("should require argument", () => {
-    expect(() => typer.parse(undefined as never)).toThrow(/string.*required/);
-  });
-
-  it("should reject non-strings", () => {
-    expect(() => typer.parse(7 as never)).toThrow(/string.*required/);
   });
 });
 
@@ -113,13 +112,5 @@ describe("typer.test", () => {
     it(`should fail invalid media type ${JSON.stringify(type)}`, () => {
       expect(typer.test(type)).toBe(false);
     });
-  });
-
-  it("should require argument", () => {
-    expect(() => typer.test(undefined as never)).toThrow(/string.*required/);
-  });
-
-  it("should reject non-strings", () => {
-    expect(() => typer.test(7 as never)).toThrow(/string.*required/);
   });
 });
