@@ -3,6 +3,7 @@ var assert = require('assert')
 var typer = require('..')
 
 var invalidTypes = [
+  '',
   ' ',
   'null',
   'undefined',
@@ -104,6 +105,10 @@ describe('typer.test(string)', function () {
 
   it('should pass upper-case type', function () {
     assert.strictEqual(typer.test('IMAGE/SVG+XML'), true)
+  })
+
+  it('should test empty string', function () {
+    assert.strictEqual(typer.test(''), false)
   })
 
   invalidTypes.forEach(function (type) {

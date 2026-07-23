@@ -83,10 +83,6 @@ function format (obj) {
  */
 
 function test (string) {
-  if (!string) {
-    throw new TypeError('argument string is required')
-  }
-
   if (typeof string !== 'string') {
     throw new TypeError('argument string is required to be a string')
   }
@@ -103,10 +99,6 @@ function test (string) {
  */
 
 function parse (string) {
-  if (!string) {
-    throw new TypeError('argument string is required')
-  }
-
   if (typeof string !== 'string') {
     throw new TypeError('argument string is required to be a string')
   }
